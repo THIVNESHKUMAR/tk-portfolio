@@ -47,7 +47,7 @@ button, input, textarea { font-family: inherit; }
   min-height: 100vh;
   display: grid;
   align-items: center;
-  padding: calc(var(--navH) + 14px) 0 48px;
+  padding: calc(var(--navH) + 15px) 0 48px;
 }
 
 /* UI */
