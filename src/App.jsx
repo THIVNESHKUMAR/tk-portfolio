@@ -6,8 +6,6 @@ import React, {
   useLayoutEffect,
 } from "react";
 
-import { useWheelRouteNav } from "./useWheelRouteNav";
-
 import {
   Routes,
   Route,
@@ -108,17 +106,12 @@ const PROFILES = [
    APP SHELL
 ----------------------------*/
 export default function App() {
-  // Toggle this to enable/disable wheel navigation between routes
-  const WHEEL_HIJACK = true;
-  useWheelRouteNav(WHEEL_HIJACK);
-
   const location = useLocation();
   return (
     <>
       <BackgroundFX />
       <TopNav />
 
-      {/* Full-page cinematic route transitions */}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<HeroAbout />} />
