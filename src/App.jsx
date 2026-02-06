@@ -41,7 +41,8 @@ const YOU = {
     "UI/UX research: URS/SRS, UAT, user manuals",
     "Vue/Vuetify + modern React experiments",
   ],
-  resumeUrl: "/resume.pdf", // put resume.pdf in /public
+  resumeUrl: "/resume.pdf",
+  photoUrl: "/profile.jpeg", // ✅ add this
 };
 
 const PROJECTS = [
@@ -495,14 +496,12 @@ function SocialLinks() {
       href: "https://www.linkedin.com/in/thivnesh-kumar-v-a84681176/",
       icon: LinkedinIcon,
     },
+
     {
-      name: "Instagram",
-      href: "https://www.instagram.com/",
-      icon: InstagramIcon,
+      name: "GitHub",
+      href: "https://github.com/THIVNESHKUMAR",
+      icon: GithubIcon,
     },
-    { name: "GitHub", href: "https://github.com/", icon: GithubIcon },
-    { name: "YouTube", href: "https://www.youtube.com/", icon: YoutubeIcon },
-    { name: "Twitter/X", href: "https://x.com/", icon: XIcon },
   ];
 
   return (
@@ -565,7 +564,6 @@ function HeroAbout() {
               </span>{" "}
               — not pages.
             </h1>
-            <p className="p">{YOU.intro}</p>
 
             <hr className="sep" />
 
@@ -613,7 +611,7 @@ function HeroAbout() {
 
           <motion.div
             className="card"
-            style={{ padding: 10, position: "relative", overflow: "hidden" }}
+            style={{ padding: 18, position: "relative", overflow: "hidden" }}
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -622,18 +620,86 @@ function HeroAbout() {
               delay: 0.12,
             }}
           >
-            <div style={{ padding: 14 }}>
-              <div className="h2" style={{ marginBottom: 8 }}>
-                3D Icon (Three.js)
+            <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+              {/* Profile photo */}
+              <div
+                style={{
+                  width: 300,
+                  height: 300,
+                  borderRadius: 22,
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  background: "rgba(255,255,255,0.04)",
+                  boxShadow: "0 20px 70px rgba(0,0,0,0.45)",
+                  flex: "0 0 auto",
+                }}
+              >
+                <img
+                  src={YOU.photoUrl}
+                  alt={YOU.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
               </div>
-              <p className="p">
-                Drag slightly • cinematic glass • smooth motion.
+
+              {/* Quick identity */}
+              <div style={{ minWidth: 0 }}>
+                <div className="badge" style={{ marginBottom: 8 }}>
+                  About Me
+                </div>
+                <div className="h2" style={{ margin: 0, lineHeight: 1.2 }}>
+                  {YOU.name}
+                </div>
+                <p className="p" style={{ marginTop: 8 }}>
+                  {YOU.role}
+                </p>
+              </div>
+            </div>
+
+            <div style={{ height: 14 }} />
+
+            {/* Short about */}
+            <div
+              className="card"
+              style={{
+                padding: 14,
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.12)",
+              }}
+            >
+              <p className="p" style={{ margin: 0 }}>
+                {YOU.intro}
               </p>
             </div>
-            <div style={{ height: 8 }} />
-            <div style={{ borderRadius: 18, overflow: "hidden" }}>
-              <ThreeIcon />
+
+            <div style={{ height: 14 }} />
+
+            {/* Buttons */}
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <FancyButton to="/resume" label="View Resume" />
+              <GhostButton to="/projects" label="See Work" />
             </div>
+
+            <div style={{ height: 14 }} />
+            <SocialLinks />
+
+            {/* Soft glow overlay */}
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: -80,
+                background:
+                  "radial-gradient(circle at 30% 30%, rgba(80,130,255,0.16), transparent 55%), radial-gradient(circle at 70% 70%, rgba(255,80,190,0.12), transparent 55%)",
+                filter: "blur(30px)",
+                pointerEvents: "none",
+                zIndex: -1,
+              }}
+            />
           </motion.div>
         </div>
       </section>
