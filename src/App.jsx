@@ -617,8 +617,8 @@ function HeroAbout() {
               {/* Profile photo */}
               <div
                 style={{
-                  width: 300,
-                  height: 300,
+                  width: 200,
+                  height: 200,
                   borderRadius: 22,
                   overflow: "hidden",
                   border: "1px solid rgba(255,255,255,0.14)",
