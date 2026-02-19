@@ -33,11 +33,11 @@ const YOU = {
   name: "Thivnesh Kumar Venugopal",
   role: "UI/UX Designer • Front-End Developer",
   intro:
-    "I design cinematic, data-driven interfaces and build responsive front-ends with polished micro-interactions.",
+    "UI/UX Designer and Front-End Developer with 3+ years of experience building enterprise analytics and data-driven web platforms in the energy, research, and business intelligence sectors. Skilled in user research, design systems, and scalable front-end development using modern JavaScript frameworks and data visualisation tools, with growing full-stack capabilities.",
   achievements: [
-    "3+ years delivering enterprise dashboards",
-    "UI/UX research: URS/SRS, UAT, user manuals",
-    "Vue/Vuetify + modern React experiments",
+    "3+ years in enterprise analytics web platforms",
+    "Strong in UI/UX, design systems & front-end development",
+    "Expanding into full-stack end-to-end solutions",
   ],
   resumeUrl: "/resume.pdf",
   photoUrl: "/profile.jpeg", // ✅ add this
@@ -547,9 +547,6 @@ function HeroAbout() {
               delay: 0.05,
             }}
           >
-            <span className="badge">
-              ✨ Cinematic UI • Motion-first • Dark Aesthetic
-            </span>
             <h1 className="h1">
               {YOU.name}.{" "}
               <span style={{ color: "rgba(155,190,255,0.95)" }}>
@@ -784,16 +781,12 @@ function Resume() {
             className="card"
             style={{ padding: 24, maxWidth: 860, margin: "0 auto" }}
           >
-            <span className="badge">📄 Downloadable Resume</span>
             <h2 className="h1" style={{ marginTop: 10 }}>
-              Resume that feels like an interaction.
+              Curriculum Vitae
             </h2>
             <p className="p">
-              Put your PDF into{" "}
-              <code style={{ color: "rgba(255,255,255,0.85)" }}>
-                /public/resume.pdf
-              </code>{" "}
-              and update the link.
+              View or download my cv for a detailed overview of my experience
+              and qualifications.
             </p>
 
             <div style={{ height: 18 }} />
@@ -849,13 +842,12 @@ function Projects() {
             }}
           >
             <div>
-              <span className="badge">🧩 Projects</span>
               <h2 className="h1" style={{ marginTop: 10 }}>
-                Hover feels 3D. Scroll stays smooth.
+                Projects
               </h2>
               <p className="p">
-                Grid cards lazy-animate into view. Each card has a 3D hover
-                scene (Three.js).
+                A showcase of my UI/UX and front-end development work, featuring
+                user-centered design and interactive web experiences.
               </p>
             </div>
           </div>
@@ -940,11 +932,14 @@ function ProjectCard({ project, index }) {
 
 function Skills() {
   const skills = [
-    { name: "UI/UX", value: 92 },
-    { name: "Front-End", value: 88 },
-    { name: "Motion Design", value: 84 },
-    { name: "Data Viz", value: 80 },
-    { name: "3D/Creative Dev", value: 72 },
+    { name: "UI/UX", value: 95 },
+    { name: "Front-End", value: 93 },
+    { name: "Adobe Creative Cloud", value: 90 },
+    { name: "Wireframing", value: 90 },
+    { name: "Git", value: 85 },
+    { name: "Microsoft Excel, PowerPoint, Word", value: 85 },
+    { name: "VS Code", value: 85 },
+    { name: "Canva", value: 83 },
   ];
 
   return (
@@ -952,13 +947,11 @@ function Skills() {
       <section className="page">
         <div className="container grid cols-2">
           <motion.div className="card" style={{ padding: 24 }}>
-            <span className="badge">🧠 Skills</span>
             <h2 className="h1" style={{ marginTop: 10 }}>
-              Animated proficiency.
+              Core Skills
             </h2>
             <p className="p">
-              Bars + counters animate with Framer Motion. No jank, mobile
-              friendly.
+              A quick overview of my key skills and professional strengths.
             </p>
 
             <div style={{ height: 18 }} />
@@ -972,11 +965,11 @@ function Skills() {
 
           <motion.div className="card" style={{ padding: 18 }}>
             <div className="h2" style={{ marginBottom: 8 }}>
-              Micro-interactions
+              Social Media
             </div>
             <p className="p">
-              Small touches that feel premium: hover lift, glow, blur, and
-              cinematic easing.
+              Connect with me through my professional platforms and latest
+              updates.
             </p>
             <div style={{ height: 12 }} />
             <SocialLinks />
