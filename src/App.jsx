@@ -72,15 +72,29 @@ const PROJECTS = [
 
 const ARTICLES = [
   {
-    title: "Designing dashboards for operational clarity",
-    date: "2025",
-    href: "#",
-  },
-  { title: "Motion as usability, not decoration", date: "2025", href: "#" },
-  {
-    title: "Building consistent UI tokens across products",
+    title: "IBM Data Analyst Professional Certificate",
     date: "2024",
-    href: "#",
+    href: "https://coursera.org/share/522e6059439ba92a13f7ca0a00520835",
+  },
+  {
+    title: "Introduction to Data Analytics",
+    date: "2023",
+    href: "https://www.coursera.org/account/accomplishments/certificate/Z42WHELCFJCP",
+  },
+  {
+    title: "Introduction to Data Analysis using Microsoft Excel",
+    date: "2023",
+    href: "https://www.coursera.org/account/accomplishments/certificate/ZM4EMQF6HA6N",
+  },
+  {
+    title: "Using Basic Formulas and Functions in Microsoft Excel",
+    date: "2023",
+    href: "https://www.coursera.org/account/accomplishments/certificate/XLNXNZVT7ZER",
+  },
+  {
+    title: "Introduction to Microsoft Excel",
+    date: "2023",
+    href: "https://www.coursera.org/account/accomplishments/certificate/L2BW7ERUECAK",
   },
 ];
 
@@ -91,14 +105,14 @@ const PROFILES = [
     href: "tel:+601114646174",
   },
   {
-    title: "LeetCode",
-    desc: "DSA practice + streaks",
-    href: "https://leetcode.com/",
+    title: "Email",
+    desc: "Please email me",
+    href: "mailto:thivnesh@email.com",
   },
   {
-    title: "SkillRack",
-    desc: "Skill challenges + certifications",
-    href: "https://www.skillrack.com/",
+    title: "WhatsApp",
+    desc: "Please WhatsApp message me",
+    href: "https://wa.me/601114646174",
   },
 ];
 
@@ -165,7 +179,7 @@ function TopNav() {
     ["/projects", "Projects"],
     ["/skills", "Skills"],
     ["/contact", "Contact"],
-    ["/articles", "Articles"],
+    ["/articles", "Cert"],
     ["/profiles", "Profiles"],
   ];
 
@@ -596,7 +610,6 @@ function HeroAbout() {
             </div>
 
             <div style={{ height: 16 }} />
-            <SocialLinks />
           </motion.div>
 
           <motion.div
@@ -706,17 +719,15 @@ function CTA() {
             className="card"
             style={{ padding: 24, maxWidth: 920, margin: "0 auto" }}
           >
-            <span className="badge">⚡ Call to Action</span>
             <h2 className="h1" style={{ marginTop: 10 }}>
-              Let’s build a{" "}
+              Let’s collaborate on your next{" "}
               <span style={{ color: "rgba(255,140,220,0.95)" }}>
-                premium experience
+                digital solution
               </span>{" "}
-              together.
             </h2>
             <p className="p">
-              This page uses a different transition style (parallax swipe) and a
-              high-impact CTA with glow + motion blur on hover.
+              I design and build premium digital experiences through thoughtful
+              UI/UX design and scalable front-end development.
             </p>
 
             <div style={{ height: 18 }} />
@@ -785,8 +796,8 @@ function Resume() {
               Curriculum Vitae
             </h2>
             <p className="p">
-              View or download my cv for a detailed overview of my experience
-              and qualifications.
+              Download my cv for a detailed overview of my experience and
+              qualifications.
             </p>
 
             <div style={{ height: 18 }} />
@@ -1060,10 +1071,23 @@ function Contact() {
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
+
+  // ✅ Replace with your real Formspree endpoint
+  const FORM_ENDPOINT = "https://formspree.io/f/mreaakwp";
+
+  const whatsappHref = useMemo(() => {
+    const phone = "601114646174"; // no +, no spaces
+    const text =
+      `Hi TK, I’m ${form.name} (${form.email}).%0A%0A` +
+      `${encodeURIComponent(form.message)}`;
+    return `https://wa.me/${phone}?text=${text}`;
+  }, [form]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setSent(false);
+    setSendError("");
 
     const res = schema.safeParse(form);
     if (!res.success) {
@@ -1072,15 +1096,42 @@ function Contact() {
       setErrors(next);
       return;
     }
+
     setErrors({});
     setSending(true);
 
-    // Replace this with your real email backend (e.g. Formspree, Resend, AWS SES, etc.)
-    await new Promise((r) => setTimeout(r, 800));
+    try {
+      // ✅ Formspree expects FormData or JSON. We'll use FormData (simplest).
+      const fd = new FormData();
+      fd.append("name", form.name);
+      fd.append("email", form.email);
+      fd.append("message", form.message);
+      // Optional: helps you identify which site it came from
+      fd.append("_subject", `Portfolio Contact: ${form.name}`);
 
-    setSending(false);
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
+      const r = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: fd,
+        headers: { Accept: "application/json" },
+      });
+
+      const data = await r.json().catch(() => ({}));
+
+      if (!r.ok) {
+        // Formspree sometimes returns { errors: [{message: "..."}] }
+        const msg =
+          data?.errors?.[0]?.message ||
+          "Couldn’t send right now. Please try WhatsApp instead.";
+        throw new Error(msg);
+      }
+
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      setSendError(err?.message || "Failed to send. Please use WhatsApp.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -1088,13 +1139,11 @@ function Contact() {
       <section className="page">
         <div className="container grid cols-2">
           <motion.div className="card" style={{ padding: 24 }}>
-            <span className="badge">✉️ Contact</span>
             <h2 className="h1" style={{ marginTop: 10 }}>
               Let’s talk.
             </h2>
             <p className="p">
-              Form validation + animated send success. Hook it to a real email
-              service when you’re ready.
+              Send me a message and it will reach my email. Or use WhatsApp.
             </p>
 
             <div style={{ height: 16 }} />
@@ -1139,6 +1188,7 @@ function Contact() {
                     background:
                       "linear-gradient(135deg, rgba(90,150,255,0.22), rgba(255,80,190,0.12))",
                     color: "rgba(255,255,255,0.92)",
+                    display: "inline-flex",
                     cursor: sending ? "not-allowed" : "pointer",
                   }}
                   whileHover={{
@@ -1147,8 +1197,33 @@ function Contact() {
                   }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {sending ? "Sending..." : "Send Message"}
+                  {sending ? "Sending..." : "Send to Email"}
                 </motion.button>
+
+                <motion.a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="card"
+                  style={{
+                    padding: "12px 16px",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.14)",
+                    background:
+                      "linear-gradient(135deg, rgba(90,150,255,0.22), rgba(255,80,190,0.12))",
+                    color: "rgba(255,255,255,0.92)",
+                    display: "inline-flex",
+                    cursor: sending ? "not-allowed" : "pointer",
+                  }}
+                  whileHover={{
+                    y: -3,
+                    boxShadow: "0 22px 80px rgba(80,130,255,0.18)",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  title="Opens WhatsApp with your message pre-filled"
+                >
+                  {sending ? "Sending..." : "Send to WhatsApp"}
+                </motion.a>
 
                 <AnimatePresence>
                   {sent && (
@@ -1163,11 +1238,36 @@ function Contact() {
                         color: "rgba(220,255,248,0.9)",
                       }}
                     >
-                      ✅ Sent successfully
+                      ✅ Sent to email
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
+
+              {sendError && (
+                <div
+                  className="card"
+                  style={{
+                    padding: 12,
+                    background: "rgba(255,80,120,0.10)",
+                    border: "1px solid rgba(255,80,120,0.18)",
+                    color: "rgba(255,220,230,0.95)",
+                  }}
+                >
+                  {sendError}{" "}
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      borderColor: "rgba(80,255,210,0.35)",
+                      color: "rgba(220,255,248,0.9)",
+                    }}
+                  >
+                    Send on WhatsApp instead →
+                  </a>
+                </div>
+              )}
             </form>
           </motion.div>
 
@@ -1221,11 +1321,14 @@ function Articles() {
       <section className="page">
         <div className="container">
           <motion.div className="card" style={{ padding: 24 }}>
-            <span className="badge">📝 Featured Articles</span>
             <h2 className="h1" style={{ marginTop: 10 }}>
-              Readable. Smooth. Soft fade-ins.
+              Certifications
             </h2>
-            <p className="p">List loads in with staggered fade + blur.</p>
+            <p className="p">
+              Here are some of my selected projects that reflect my experience
+              in UI/UX design and front-end development, focusing on building
+              intuitive, data-driven digital experiences.
+            </p>
 
             <div style={{ height: 16 }} />
 
@@ -1275,9 +1378,7 @@ function Profiles() {
             <h2 className="h1" style={{ marginTop: 10 }}>
               Profile
             </h2>
-            <p className="p">
-              Use this for GitHub, LeetCode, SkillRack, HackerRank, etc.
-            </p>
+            <p className="p">Feel free to reach out</p>
 
             <div style={{ height: 16 }} />
 
@@ -1316,7 +1417,7 @@ function Profiles() {
                   <div className="h2">{p.title}</div>
                   <p className="p">{p.desc}</p>
                   <div style={{ height: 10 }} />
-                  <div className="badge">Visit →</div>
+                  <div className="badge">Click Here →</div>
                 </motion.a>
               ))}
             </div>
