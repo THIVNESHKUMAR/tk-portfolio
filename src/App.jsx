@@ -86,9 +86,9 @@ const ARTICLES = [
 
 const PROFILES = [
   {
-    title: "GitHub",
-    desc: "Code + case studies + experiments",
-    href: "https://github.com/",
+    title: "Contact Number",
+    desc: "Please contact me",
+    href: "tel:+601114646174",
   },
   {
     title: "LeetCode",
@@ -1272,9 +1272,8 @@ function Profiles() {
       <section className="page">
         <div className="container">
           <motion.div className="card" style={{ padding: 24 }}>
-            <span className="badge">💻 Coding Profiles</span>
             <h2 className="h1" style={{ marginTop: 10 }}>
-              Cards that pop in.
+              Profile
             </h2>
             <p className="p">
               Use this for GitHub, LeetCode, SkillRack, HackerRank, etc.
