@@ -45,28 +45,28 @@ const YOU = {
 
 const PROJECTS = [
   {
-    title: "Reliability Analytics Dashboard",
-    tag: "UI/UX + Front-End",
-    desc: "Operational analytics with drilldowns + filters + export.",
-    href: "#",
+    title: "Data Training System",
+    tag: "Front-End",
+    desc: "Figma",
+    href: "https://data-training-system.vercel.app/",
+  },
+  {
+    title: "Monetary Loss Analytics",
+    tag: "UI/UX",
+    desc: "Figma",
+    href: "https://www.figma.com/design/L8J6JcicZ7XmYwaj0s5cYh/Monetary-Loss-Analytics?node-id=0-1&m=dev&t=vfFwpSwMOkI2mCE4-1",
   },
   {
     title: "Calendar Work Order Planner",
-    tag: "Web App",
-    desc: "Look-ahead scheduling view with constraints + trends.",
-    href: "#",
+    tag: "UI/UX",
+    desc: "Figma",
+    href: "https://www.figma.com/design/TBCjP0or3G1rhX3UxBQ30X/Maintenance-Schedule-Operation?node-id=0-1&m=dev&t=S3LvPJSNl6yIoJSy-1",
   },
   {
-    title: "Corrosion Analytics Portal",
-    tag: "Data + UI",
-    desc: "Engineer-first visual language and interaction model.",
-    href: "#",
-  },
-  {
-    title: "Design System Kit",
-    tag: "Components",
-    desc: "Tokens, patterns, motion guidelines, and reusable UI.",
-    href: "#",
+    title: "Equipment Monitoring System",
+    tag: "UI/UX",
+    desc: "Figma",
+    href: "https://www.figma.com/design/FULYVHHZnvBS7lZ5ow7SGp/Equipment-Monitoring?node-id=0-1&m=dev&t=Hy68rT8iaRMZPYRg-1",
   },
 ];
 
